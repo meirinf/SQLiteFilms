@@ -35,8 +35,7 @@ public class themovieDBproject {
         String api_key = "5e9707dca1d918600724188d7bcdb593";
 
         for (int i = 0; i < 40; i++) {
-            int peli = 600 +i;
-            int actor = 234351 +i;
+            int peli = 500 +i;
             String film = String.valueOf(peli);
             String peticio = "https://api.themoviedb.org/3/movie/"+film+"?api_key="+api_key;
             String actorPeticion ="https://api.themoviedb.org/3/movie/"+film+"/credits"+"?api_key="+api_key;
@@ -91,6 +90,7 @@ public class themovieDBproject {
             System.out.println("Nom :"+NAME);
             System.out.println("Personatge :"+CHARACTER);
             System.out.println();
+
 
             insertSQLite.insertActores(ID,NAME,CHARACTER);
 

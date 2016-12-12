@@ -16,7 +16,7 @@ public class insertSQLite {
             c = DriverManager.getConnection("jdbc:sqlite:movie.db");
 
             String sql = "INSERT INTO FILMS (ID,NAME, FECHA_ESTRENO) " +
-                    "VALUES (?,? ,? );";
+                    "VALUES (?,?,?);";
 
             PreparedStatement preparedStatement = c.prepareStatement(sql);
             preparedStatement.setInt(1 , ID);
@@ -39,7 +39,7 @@ public class insertSQLite {
             c = DriverManager.getConnection("jdbc:sqlite:movie.db");
 
             String sql = "INSERT INTO ACTORES(ID_ACTOR,Nombre_Actor,Personaje) " +
-                    "VALUES (?, ?, ?);";
+                    "VALUES (?,?,?);";
 
             PreparedStatement preparedStatement = c.prepareStatement(sql);
             preparedStatement.setInt(1 , ID_ACTOR);

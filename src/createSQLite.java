@@ -23,7 +23,7 @@ public class createSQLite {
 
                 String sqlActor = "CREATE TABLE ACTORES"+
                         "(ID_ACTOR INT PRIMARY KEY    NOT NULL,"+
-                        "Nombre_Actor TEXT NOT NULL),"+
+                        "Nombre_Actor TEXT NOT NULL,"+
                         "Personaje TEXT NOT NULL)";
 
 

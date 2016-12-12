@@ -6,8 +6,7 @@ import java.sql.*;
  */
 public class selectSQLite {
 
-    public static void main(String[] args)
-        {
+    public static void main(String[] args) {
             Connection c = null;
             Statement stmt = null;
             try {
@@ -18,15 +17,33 @@ public class selectSQLite {
 
                 stmt = c.createStatement();
                 ResultSet rs = stmt.executeQuery( "SELECT * FROM FILMS;" );
-                while ( rs.next() ) {
+
+                 while ( rs.next() ) {
+                     //Recogemos los datos de la base de datos con el tag
                     int id = rs.getInt("id");
                     String  name = rs.getString("name");
-                    int age  = rs.getInt("age");
+                    int fecha_estreno  = rs.getInt("FECHA_ESTRENO");
+                    //Imprimimos
                     System.out.println( "ID = " + id );
                     System.out.println( "NAME = " + name );
-                    System.out.println( "AGE = " + age );
+                    System.out.println( "FECHA_ESTRENO = " + fecha_estreno);
+                    System.out.println();
+                    }
+
+                  ResultSet rs1 = stmt.executeQuery( "SELECT * FROM ACTORES;" );
+                while ( rs1.next() ) {
+                    //Recogemos los datos de la base de datos con el tag
+                    int ida = rs1.getInt("ID_ACTOR");
+                    String nombre_act =  rs1.getString("Nombre_Actor");
+                    String personaje = rs1.getString("Personaje");
+
+                    //Imprimimos
+                    System.out.println( "ID_ACTOR  = " + ida );
+                    System.out.println( "Nombre_Actor = " + nombre_act);
+                    System.out.printf("Personaje = "+personaje);
                     System.out.println();
                 }
+                                  System.out.println();
                 rs.close();
                 stmt.close();
                 c.close();
