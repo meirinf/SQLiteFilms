@@ -64,6 +64,7 @@ public class themovieDBproject {
         System.out.println("ID :"+ID);
         System.out.println("Titul original :"+NAME);
         System.out.println("Data d'estrena :" + FECHA_ESTRENO);
+        System.out.println();
 
         insertSQLite.insertFilms(ID,NAME,FECHA_ESTRENO);
 
