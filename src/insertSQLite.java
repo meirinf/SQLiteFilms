@@ -24,8 +24,8 @@ public class insertSQLite {
                 preparedStatement.setString(3 , FECHA_ESTRENO);
 
                 preparedStatement.executeUpdate();
+                preparedStatement.executeUpdate();
                 preparedStatement.close();
-                c.commit();
                 c.close();
 
             }catch ( Exception e ) {
@@ -51,7 +51,8 @@ public class insertSQLite {
                 preparedStatement.executeUpdate();
 
                 preparedStatement.close();
-                c.commit();
+                preparedStatement.executeUpdate();
+                preparedStatement.close();
                 c.close();
 
             }catch ( Exception e ) {
@@ -78,7 +79,6 @@ public class insertSQLite {
 
                 preparedStatement.executeUpdate();
                 preparedStatement.close();
-                c.commit();
                 c.close();
 
             }catch ( Exception e ) {

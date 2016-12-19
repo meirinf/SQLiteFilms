@@ -113,44 +113,61 @@ public class selectSQLite {
     }
 
     private static void relacion_pelicula() {
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:movie.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT ID, NAME FROM FILMS;" );
+            //Imprimimos
+            while ( rs.next() ) {
+                int id = rs.getInt("ID");
+                String nom = rs.getString("NAME");
+
+                System.out.println( "La pelicla : " + nom + " tiene la ID : " + id );
+                System.out.println();
+            }
+            System.out.println("Escribe la id DE PELICULA : ");
+            Scanner scr = new Scanner(System.in);
+            int ID = scr.nextInt();
+
+            //Variable de la consulta en BBDD
+            rs = stmt.executeQuery( "SELECT  ID , NAME, ID_ACTOR, Nombre_Actor, iD_MOVIE \n" +
+                    "  FROM ACTORES \n" +
+                    "  INNER JOIN PERS  on ID_ACTOR = ACTORES.ID_ACTOR \n" +
+                    "  INNER JOIN FILMS  on ID_MOVIE = ID \n" +
+                    "  where ID= "+ ID + ";" );
+
+
+            System.out.println("ID_PELICULA   |    NOM_PELICULA    |    ID_ACTOR   |   NOM_ACTOR   |   PERSONAJE");
+            System.out.println();
+            //Imprimimos la relacion por pantalla
+            while ( rs.next() ) {
+                int id_peli = rs.getInt("ID_peli");
+                String nom_peli = rs.getString("NOM_peli");
+                int id_actor = rs.getInt("ID_act");
+                String nom_actor = rs.getString("NOM_act");
+                String nom_personaje = rs.getString("PERSONAJE");
+
+
+                System.out.println( id_peli + "   |   " + nom_peli + "   |   " + id_actor + "   |   " + nom_actor + "   |   " + nom_personaje);
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
 
     }
 
     private static void relacion_actor() {
 
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-
-            Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:movie.db");
-            conn.setAutoCommit(false);
-            System.out.println("Opened database successfully");
-
-            stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT * FROM ACTORES;" );
-            while ( rs.next() ) {
-                //Recogemos los datos de la base de datos con el tag
-                int ida = rs.getInt("ID_ACTOR");
-                String nombre_act =  rs.getString("Nombre_Actor");
-                String personaje = rs.getString("Personaje");
-
-                //Imprimimos
-                System.out.println("");
-                System.out.println( "ID_ACTOR  = " + ida );
-                System.out.println( "Nombre_Actor = " + nombre_act);
-                System.out.printf("Personaje = "+personaje);
-                System.out.println("");
-            }
-            System.out.println();
-            rs.close();
-            stmt.close();
-            conn.close();
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);
-        }
-        System.out.println("Operation done successfully");
     }
 
 }
