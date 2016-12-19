@@ -13,8 +13,6 @@ import java.net.*;
  * Created by dremon on 09/11/15.
  */
 public class themovieDBproject {
-
-
     public static String getHTML(String urlToRead) throws Exception {
         StringBuilder result = new StringBuilder();
         URL url = new URL(urlToRead);
@@ -34,16 +32,17 @@ public class themovieDBproject {
         String j = "";
         String api_key = "5e9707dca1d918600724188d7bcdb593";
 
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 10 ; i++) {
             int peli = 500 +i;
             String film = String.valueOf(peli);
             String peticio = "https://api.themoviedb.org/3/movie/"+film+"?api_key="+api_key;
-            String actorPeticion ="https://api.themoviedb.org/3/movie/"+film+"/credits"+"?api_key="+api_key;
+            String personaje_peticion ="https://api.themoviedb.org/3/movie/"+film+"/credits?api_key="+api_key;
+            // actorPeticion ACTORES https://api.themoviedb.org/3/person/{person_id}?api_key=<<api_key>>&language=en-US
             try {
                 s = getHTML(peticio);
                 SJS(s);
-                j = getHTML(actorPeticion);
-                SJC(j);
+                j = getHTML(personaje_peticion);
+                SJPER(j);
             } catch (Exception e) {
                 System.out.println("La peli "+film+" no existeix");
             }
@@ -51,6 +50,39 @@ public class themovieDBproject {
 
 
     }
+    //Personajes
+
+    private static void SJPER(String cadena) {
+
+        Object obj02 =JSONValue.parse(cadena);
+        JSONObject arra02=(JSONObject)obj02;
+        //De aqui saco el id pelicula
+        int id_film = Integer.parseInt(String.valueOf(arra02.get("id")));
+        JSONArray arra03 = (JSONArray)arra02.get("cast");
+
+        for (int i = 0; i < arra03.size(); i++) {
+
+            JSONObject jb= (JSONObject)arra03.get(i);
+
+            int id_actor = Integer.parseInt(String.valueOf(jb.get("id")));
+            String nombre_actor = String.valueOf(jb.get("name"));
+            int cast_id = Integer.parseInt(String.valueOf(jb.get("cast_id")));
+            String nombre_personaje =  String.valueOf(jb.get("character"));
+
+            System.out.println("ID :"+id_actor);
+            System.out.println("Nom :"+nombre_actor);
+            System.out.println();
+
+    //Introduxco los dos a la vez ya que en Credits esta toda la infromación necesaria
+            insertSQLite.insertActores(id_actor,nombre_actor);
+            insertSQLite.insertPersonajes(id_actor,id_film,cast_id,nombre_personaje);
+
+        }
+
+
+
+    }
+    //films
 
     public static void SJS (String cadena){
 
@@ -68,34 +100,9 @@ public class themovieDBproject {
 
         insertSQLite.insertFilms(ID,NAME,FECHA_ESTRENO);
 
-        //Personajes
-
-
-
     }
 
     public static void SJC (String cadena){
-        Object obj02 =JSONValue.parse(cadena);
-        JSONObject arra02=(JSONObject)obj02;
-        JSONArray arra03 = (JSONArray)arra02.get("cast");
-
-        for (int i = 0; i < arra03.size(); i++) {
-
-            JSONObject jb= (JSONObject)arra03.get(i);
-
-            int ID = Integer.parseInt(String.valueOf(jb.get("id")));
-            String NAME = String.valueOf(jb.get("name"));
-            String CHARACTER = String.valueOf(jb.get("character"));
-
-            System.out.println("ID :"+ID);
-            System.out.println("Nom :"+NAME);
-            System.out.println("Personatge :"+CHARACTER);
-            System.out.println();
-
-
-            insertSQLite.insertActores(ID,NAME,CHARACTER);
-
-        }
 
     }
 

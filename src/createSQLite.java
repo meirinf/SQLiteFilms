@@ -19,28 +19,37 @@ public class createSQLite {
                 String sql = "CREATE TABLE FILMS " +
                         "(ID INT PRIMARY KEY     NOT NULL," +
                         " NAME           TEXT    NOT NULL, " +
-                        " FECHA_ESTRENO  DATE     NOT NULL) " ;
+                        " FECHA_ESTRENO  DATE     NOT NULL) ";
 
-                String sqlActor = "CREATE TABLE ACTORES"+
-                        "(ID_ACTOR INT PRIMARY KEY    NOT NULL,"+
-                        "Nombre_Actor TEXT NOT NULL,"+
-                        "Personaje TEXT NOT NULL)";
+                String sqlActor = "CREATE TABLE ACTORES" +
+                        "(ID_ACTOR INT PRIMARY KEY    NOT NULL," +
+                        "Nombre_Actor TEXT )";
 
+                String sqlPersonajes = "CREATE TABLE PERS " +
+                        "(ID_ACTOR INT  NOT NULL, " +
+                        "iD_MOVIE INT  NOT NULL, " +
+                        "iD_CAST INT  NOT NULL, " +
+                        "NOMBRE_PERSONAJE TEXT NOT NULL, " +
+                        "PRIMARY KEY (ID_ACTOR,iD_MOVIE,iD_CAST))";
 
                 stmt.executeUpdate(sql);
                 stmt.executeUpdate(sqlActor);
+                stmt.executeUpdate(sqlPersonajes);
 
 
                 stmt.close();
                 c.close();
-            } catch ( Exception e ) {
-                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
             System.out.println("Table created successfully");
         }
-
     }
-
-
 }
+
+
+
+
+
+

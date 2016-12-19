@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Sqlite (Xerial) - test.db" uuid="9a4a0b9d-dc53-421e-9871-44f7b789b81f">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/test.db</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="movie" uuid="001b0fe2-40a1-4ab8-9e9d-dba71323d887">
+    <data-source source="LOCAL" name="movie" uuid="abb1ce21-cb3a-4e19-b081-1dcc9d6d029e">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
