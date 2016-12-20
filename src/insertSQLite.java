@@ -24,7 +24,6 @@ public class insertSQLite {
                 preparedStatement.setString(3 , FECHA_ESTRENO);
 
                 preparedStatement.executeUpdate();
-                preparedStatement.executeUpdate();
                 preparedStatement.close();
                 c.close();
 
@@ -48,9 +47,7 @@ public class insertSQLite {
                 PreparedStatement preparedStatement = c.prepareStatement(sql);
                 preparedStatement.setInt(1 , ID_ACTOR);
                 preparedStatement.setString(2 , Actonnom);
-                preparedStatement.executeUpdate();
 
-                preparedStatement.close();
                 preparedStatement.executeUpdate();
                 preparedStatement.close();
                 c.close();
